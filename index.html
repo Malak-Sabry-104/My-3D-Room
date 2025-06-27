@@ -12,13 +12,21 @@
 <body>
 
   <a-scene>
+    <a-entity camera look-controls>
+      <a-entity cursor="fuse: false; rayOrigin: mouse" position="0 0 -1"
+        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
+      </a-entity>
+    </a-entity>
+
     <!-- sky -->
-    <a-sky color="#87CEEB"></a-sky>
+    <a-sky id="sky" color="#87CEEB"></a-sky>
 
     <!-- sun -->
-    <a-sphere position="0 20 -20" radius="2" color="yellow" segments-width="18" segments-height="36"
+    <a-sphere id="sun" position="0 20 -20" radius="2" color="yellow" segments-width="18" segments-height="36"
       animation="property: position; to: 0 10 20; loop: true; dur: 30000; dir: alternate">
     </a-sphere>
+    <a-light id="sunlight" type="directional" color="#fff" intensity="0.8" position="1 4 -2"
+      castShadow="true"></a-light>
 
     <!-- grass-->
     <a-plane position="0 -0.51 -4" rotation="-90 0 0" width="100" height="100" color="#228B22"></a-plane>
@@ -38,7 +46,8 @@
     <a-box position="0 -0.2 -5.8" width="0.2" height="0.5" depth="7.5" rotation="0 90 0" color="#412716"></a-box>
 
     <!-- orange box -->
-    <a-box position="0 0 -2.7" color="#E08343" depth="0.2" height="0.7" width="0.7"></a-box>
+    <a-box position="0 0 -2.7" color="#E08343" event-set__click="_event: click; color: blue" depth="0.2" height="0.7"
+      width="0.7" animation__click="property: rotation; to: 0 360 0; dur: 1000; startEvents: click"></a-box>
 
 
     <!-- cubboard -->
@@ -129,6 +138,31 @@
 
 
     </a-scene>
+    <button onclick="toggleNight()" style="position: absolute; top: 20px; left: 20px; z-index: 999;">
+      Toggle Day/Night
+    </button>
+    <script>
+      let isNight = false;
+
+      function toggleNight() {
+        const sky = document.querySelector('#sky');
+        const sun = document.querySelector('#sun');
+        const light = document.querySelector('#sunlight');
+
+        if (!isNight) {
+          sky.setAttribute('color', '#0B0C2A'); // dark night sky
+          sun.setAttribute('color', '#ccc'); // moon color
+          light.setAttribute('intensity', '0.2'); // dim light
+        } else {
+          sky.setAttribute('color', '#87CEEB'); // daytime sky
+          sun.setAttribute('color', 'yellow');  // sun color
+          light.setAttribute('intensity', '0.8'); // bright light
+        }
+
+        isNight = !isNight;
+      }
+    </script>
+
 </body>
 
 
