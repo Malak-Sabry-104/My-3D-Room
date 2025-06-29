@@ -27,9 +27,6 @@ Here's a clean and professional version of your README formatted in Markdown for
 
 ![Screenshot 2025-06-27 at 4 52 11 AM](https://github.com/user-attachments/assets/3ee03e11-352d-4f8a-b3b5-0f79ba7d4f24)
 
-## My Room
-![From Google](https://github.com/user-attachments/assets/7d14b216-ed47-460e-86f8-5094e6556c65)
-
 ---
 
 ## Tech Stack
